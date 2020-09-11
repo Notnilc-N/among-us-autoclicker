@@ -110,7 +110,7 @@ settimer,tooltipoff,500					; ALREADY BEEN DONE WITH "---SET TOGGLE CLICK POSITI
 return							; "---TOGGLE AUTO CLICK 2---" AND EXTRAPOLATE FROM THERE.
 
 ;---TOGGLE AUTO CLICK 1---
-^+~$LButton::						; HOTKEY TO START AUTO CLICKING IN TOGGLE CLICK POSITION 1.
+^+$LButton::						; HOTKEY TO START AUTO CLICKING IN TOGGLE CLICK POSITION 1.
     While (GetKeyState("LButton", "P")) {		; CURRENT HOTKEY IS {ctrl}{shift}{LClick}.
         Click, %tx1%, %ty1%
         Sleep 10
@@ -125,7 +125,7 @@ settimer,tooltipoff,500
 return
 
 ;---TOGGLE AUTO CLICK 2---
-^!~$LButton::						; HOTKEY TO START AUTO CLICKING IN TOGGLE CLICK POSITION 2.
+^!$LButton::						; HOTKEY TO START AUTO CLICKING IN TOGGLE CLICK POSITION 2.
     While (GetKeyState("LButton", "P")) {		; CURRENT HOTKEY IS {ctrl}{alt}{LClick}.
         Click, %tx2%, %ty2%
         Sleep 10
