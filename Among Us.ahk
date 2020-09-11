@@ -61,7 +61,7 @@ return
 Suspend							; CHANGE THE "+f1" TO CHANGE THE HOTKEY.
 toggle := !toggle  ;toggle on off
 tooltip % "SCRIPT: " (!toggle ? "ON" : "OFF")
-settimer,tooltipoff,-500					; OPTIONAL TIMER FOR HOW LONG UNTIL TOOLTIP DISAPPEARS. REMOVE THE ";"
+settimer,tooltipoff,-500				; OPTIONAL TIMER FOR HOW LONG UNTIL TOOLTIP DISAPPEARS. REMOVE THE ";"
 return							; TO ENABLE THE TIMER. CHANGE THE "500" TO CHANGE THE TIMER (UNITS IN ms).
 
 !+f1::							; HOTKEY THAT EXITS THE SCRIPT. CURRENT HOTKEY IS {alt}{shift}{f1}.
@@ -111,8 +111,9 @@ return							; "---TOGGLE AUTO CLICK 2---" AND EXTRAPOLATE FROM THERE.
 
 ;---TOGGLE AUTO CLICK 1---
 ^+$LButton::						; HOTKEY TO START AUTO CLICKING IN TOGGLE CLICK POSITION 1.
+MouseMove, %tx1%, %ty1%
     While (GetKeyState("LButton", "P")) {		; CURRENT HOTKEY IS {ctrl}{shift}{LClick}.
-        Click, %tx1%, %ty1%
+        Click
         Sleep 10
     }
 return
@@ -126,8 +127,9 @@ return
 
 ;---TOGGLE AUTO CLICK 2---
 ^!$LButton::						; HOTKEY TO START AUTO CLICKING IN TOGGLE CLICK POSITION 2.
+MouseMove, %tx2%, %ty2%
     While (GetKeyState("LButton", "P")) {		; CURRENT HOTKEY IS {ctrl}{alt}{LClick}.
-        Click, %tx2%, %ty2%
+        Click
         Sleep 10
     }
 return
