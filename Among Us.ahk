@@ -1,22 +1,33 @@
 ; Author: Notnilc Neyugn (Twitter: @notnilc2107, Email: notnilc.2107@gmail.com)
 ; Date created: 10th September 2020
 
-;----------------------------INSTRUCTIONS MANUAL----------------------------
-;---AUTOCLICK INSTRUCTIONS---
+;----------------------------INSTRUCTIONS----------------------------
 ; Use {shift}{f1} to suspend/unsuspend the hotkeys and {alt}{shift}{f1} to exit the script.
-; Use {ctrl}{shift}{c} to set where you want to autoclick. This saves your current mouse position for when you use the 
-; autoclick hotkey.
-; Use {ctrl}{shift}{LClick} to start autoclicking. Hold down on {LClick} to continue autoclicking. You don't have to 
-; hold down on {ctrl}{shift} to continue autoclicking once you've pressed {ctrl}{shift}{LClick}.
+
+;---AUTOCLICK INSTRUCTIONS---
+; Use {ctrl}{shift}{c} to set up the first position where you want to autoclick. This saves your current mouse
+; position for when you use the autoclick hotkey.
+; Use {ctrl}{shift}{LClick} to start autoclicking in position 1. Hold down on {LClick} to continue autoclicking.
+; You don't have to hold down on {ctrl}{shift} to continue autoclicking once you've pressed {ctrl}{shift}{LClick}.
+;
+; Use {ctrl}{alt}{c} to set up the second position where you want to autoclick. This saves your current mouse
+; position for when you use the autoclick hotkey.
+; Use {ctrl}{alt}{LClick} to start autoclicking in position 2. Hold down on {LClick} to continue autoclicking. You
+; don't have to hold down on {ctrl}{shift} to continue autoclicking once you've pressed {ctrl}{shift}{LClick}.
 
 ;---CUSTOM MOUSE POSITION CLICK INSTRUCTIONS---
 ; Use {ctrl}{shift}{1} to set mouse position 1. This saves your current mouse position for when you want to use it.
 ; Use {1} to click in the position that was recorded with {ctrl}{shift}{1}. If no mouse position is recorded, then {1}
-; performs a standard left click (on top of your cursor).
+; does nothing.
+;
 ; Use {ctrl}{shift}{2} to set mouse position 2 and {2} to click in that position. I haven't added a "set mouse position
 ; 3" yet, but there are instructions for how to do so under the "SET MOUSE POSITIONS" section.
+;
 ; Use {alt}{shift}{1} to load the first mouse position preset. The default values are {420,69} for mouse position 1 
-; and {69,420} for mouse position 2.
+; and {69,420} for mouse position 2. There are instructions in the script on how to change them.
+;
+; Use {alt}{shift}{2} to load the first mouse position preset. The default values are {69,420} for mouse position 1 
+; and {420,69} for mouse position 2.
 
 
 ;---shortcuts for common hotkeys---
@@ -25,22 +36,6 @@
 ; + = {shift}
 ; # = {windows_key}
 ; The ";" character indicates a comment. Anything after the ";" is meant to be read.
-
-;------------------------------TOGGLE ON AND OFF------------------------------
-+f1::							; HOTKEY THAT TURNS TOGGLE ON OR OFF. CURRENT HOTKEY IS {shift}{f1}.
-Suspend							; CHANGE THE "+f1" TO CHANGE THE HOTKEY.
-toggle := !toggle  ;toggle on off
-tooltip % "SCRIPT: " (!toggle ? "ON" : "OFF")
-settimer,tooltipoff,-500					; OPTIONAL TIMER FOR HOW LONG UNTIL TOOLTIP DISAPPEARS. REMOVE THE ";"
-return							; TO ENABLE THE TIMER. CHANGE THE "500" TO CHANGE THE TIMER (UNITS IN ms).
-
-!+f1::							; HOTKEY THAT EXITS THE SCRIPT. CURRENT HOTKEY IS {alt}{shift}{f1}.
-ExitApp							; CHANGE THE "!+f1" TO CHANGE THE HOTKEY.
-return
-
-tooltipoff:
-tooltip
-return
 
 ;------------------------------LOAD PRESET MOUSE POSITIONS------------------------------
 coordmode,mouse,screen					; COORDINATE MODE RELATIVE TO SCREEN.
@@ -59,6 +54,22 @@ x1 = 69
 x1 = 420
 x2 := 420
 y2 := 69
+return
+
+;------------------------------TOGGLE ON AND OFF------------------------------
++f1::							; HOTKEY THAT TURNS TOGGLE ON OR OFF. CURRENT HOTKEY IS {shift}{f1}.
+Suspend							; CHANGE THE "+f1" TO CHANGE THE HOTKEY.
+toggle := !toggle  ;toggle on off
+tooltip % "SCRIPT: " (!toggle ? "ON" : "OFF")
+settimer,tooltipoff,-500					; OPTIONAL TIMER FOR HOW LONG UNTIL TOOLTIP DISAPPEARS. REMOVE THE ";"
+return							; TO ENABLE THE TIMER. CHANGE THE "500" TO CHANGE THE TIMER (UNITS IN ms).
+
+!+f1::							; HOTKEY THAT EXITS THE SCRIPT. CURRENT HOTKEY IS {alt}{shift}{f1}.
+ExitApp							; CHANGE THE "!+f1" TO CHANGE THE HOTKEY.
+return
+
+tooltipoff:
+tooltip
 return
 
 ;-------------------------------CUSTOM MOUSE POSITION CLICKS-------------------------------

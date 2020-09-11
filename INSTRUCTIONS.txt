@@ -1,0 +1,27 @@
+Instructions:
+; Use {shift}{f1} to suspend/unsuspend the hotkeys and {alt}{shift}{f1} to exit the script.
+
+;---AUTOCLICK INSTRUCTIONS---
+; Use {ctrl}{shift}{c} to set up the first position where you want to autoclick. This saves your current mouse
+; position for when you use the autoclick hotkey.
+; Use {ctrl}{shift}{LClick} to start autoclicking in position 1. Hold down on {LClick} to continue autoclicking.
+; You don't have to hold down on {ctrl}{shift} to continue autoclicking once you've pressed {ctrl}{shift}{LClick}.
+;
+; Use {ctrl}{alt}{c} to set up the second position where you want to autoclick. This saves your current mouse
+; position for when you use the autoclick hotkey.
+; Use {ctrl}{alt}{LClick} to start autoclicking in position 2. Hold down on {LClick} to continue autoclicking. You
+; don't have to hold down on {ctrl}{shift} to continue autoclicking once you've pressed {ctrl}{shift}{LClick}.
+
+;---CUSTOM MOUSE POSITION CLICK INSTRUCTIONS---
+; Use {ctrl}{shift}{1} to set mouse position 1. This saves your current mouse position for when you want to use it.
+; Use {1} to click in the position that was recorded with {ctrl}{shift}{1}. If no mouse position is recorded, then {1}
+; does nothing.
+;
+; Use {ctrl}{shift}{2} to set mouse position 2 and {2} to click in that position. I haven't added a "set mouse position
+; 3" yet, but there are instructions for how to do so under the "SET MOUSE POSITIONS" section.
+;
+; Use {alt}{shift}{1} to load the first mouse position preset. The default values are {420,69} for mouse position 1 
+; and {69,420} for mouse position 2. There are instructions in the script on how to change them.
+;
+; Use {alt}{shift}{2} to load the first mouse position preset. The default values are {69,420} for mouse position 1 
+; and {420,69} for mouse position 2.
