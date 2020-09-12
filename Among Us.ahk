@@ -41,17 +41,17 @@
 coordmode,mouse,screen					; COORDINATE MODE RELATIVE TO SCREEN.
 
 ;---LOAD MOUSE POSITION PRESET 1---
-!+1::							; HOTKEY TO LOAD DEFAULT MOUSE POSITIONS 1. CURRENT HOTKEY IS {alt}{shift}{1}.
+^!1::							; HOTKEY TO LOAD DEFAULT MOUSE POSITIONS 1. CURRENT HOTKEY IS {ctrl}{alt}{1}.
 x1 = 420						; CURRENT DEFAULT x1 VALUE IS 420. USE {ctrl}{shift}{1} TO SHOW MOUSE POSITION.
-x1 = 69							; CURRENT DEFAULT y1 VALUE IS 69. USE {ctrl}{shift}{1} TO SHOW MOUSE POSITION.
+y1 = 69							; CURRENT DEFAULT y1 VALUE IS 69. USE {ctrl}{shift}{1} TO SHOW MOUSE POSITION.
 x2 := 69						; IF YOU WANT TO ADD ANOTHER PRESET, THEN STUDY WHAT'S ALREADY BEEN DONE WITH
 y2 := 420						; "---LOAD PRESET MOUSE POSITIONS 2---" AND EXTRAPOLATE FROM THERE.
 return
 
 ;---LOAD MOUSE POSITION PRESET 2---
-!+2::							; HOTKEY TO LOAD PRESET MOUSE POSITIONS 2. CURRENT HOTKEY IS {alt}{shift}{2}.
+^!2::							; HOTKEY TO LOAD PRESET MOUSE POSITIONS 2. CURRENT HOTKEY IS {ctrl}{alt}{2}.
 x1 = 69
-x1 = 420
+y1 = 420
 x2 := 420
 y2 := 69
 return
@@ -59,7 +59,7 @@ return
 ;------------------------------TOGGLE ON AND OFF------------------------------
 +f1::							; HOTKEY THAT TURNS TOGGLE ON OR OFF. CURRENT HOTKEY IS {shift}{f1}.
 Suspend							; CHANGE THE "+f1" TO CHANGE THE HOTKEY.
-toggle := !toggle  ;toggle on off
+toggle := !toggle
 tooltip % "SCRIPT: " (!toggle ? "ON" : "OFF")
 settimer,tooltipoff,-500				; OPTIONAL TIMER FOR HOW LONG UNTIL TOOLTIP DISAPPEARS. REMOVE THE ";"
 return							; TO ENABLE THE TIMER. CHANGE THE "500" TO CHANGE THE TIMER (UNITS IN ms).
@@ -69,12 +69,28 @@ ExitApp							; CHANGE THE "!+f1" TO CHANGE THE HOTKEY.
 return
 
 tooltipoff:
+settimer,tooltipoff,off
 tooltip
 return
 
 ;-------------------------------CUSTOM MOUSE POSITION CLICKS-------------------------------
+;---SHOW CURRENT MOUSE POSITIONS---
+!`::							; HOTKEY THAT SHOWS MOUSE POSITIONS. CURRENT HOTKEY IS {alt}{`}.
+toggle2 := !toggle2					; USE {alt}{`} AGAIN TO CLOSE THE TOOLTIP.
+if toggle2						; {`} SHOULD BE TO THE LEFT OF {1} ON YOUR KEYBOARD.
+	tooltip,
+	( join
+	Position 1: %x1% , %y1%
+	`nPosition 2: %x2% , %y2%
+	`nPosition 3: %x3% , %y3%
+	`nPosition 4: %x4% , %y3%
+	)
+else
+	tooltip
+return
+
 ;---SET MOUSE POSITION 1---
-^+1::							; HOTKEY THAT SETS MOUSE POSITION1. CURRENT HOTKEY IS {ctrl}{shift}{1}.
+!+1::							; HOTKEY THAT SETS MOUSE POSITION1. CURRENT HOTKEY IS {alt}{shift}{1}.
 mousegetpos, x1, y1					; IF YOU WANT TO ADD ANOTHER MOUSE POSITION, THEN STUDY WHAT'S ALREADY 
 tooltip % "Mouse click Position 1: " x1 ", " y1		; BEEN DONE WITH "---SET MOUSE POSITION 2---" AND 
 settimer,tooltipoff,500					; "---MOUSE POSITION 2 CLICK---" AND EXTRAPOLATE FROM THERE.
@@ -82,13 +98,13 @@ return
 
 ;---MOUSE POSITION 1 CLICK---
 #if x1 is number
-1::							; HOTKEY FOR MOUSE POSITION 1. CURRENT HOTKEY IS {1}.
+!1::							; HOTKEY FOR MOUSE POSITION 1. CURRENT HOTKEY IS {alt}{1}.
 Click, %x1%, %y1%
 return
 #if
 
 ;---SET MOUSE POSITION 2---
-^+2::							; HOTKEY THAT SETS MOUSE POSITION2. CURRENT HOTKEY IS {ctrl}{shift}{2}.
+!+2::							; HOTKEY THAT SETS MOUSE POSITION2. CURRENT HOTKEY IS {alt}{shift}{2}.
 mousegetpos, x2, y2
 tooltip % "Mouse click Position 2: " x2 ", " y2
 settimer,tooltipoff,500
@@ -96,39 +112,67 @@ return
 
 ;---MOUSE POSITION 2 CLICK---
 #if x2 is number
-2::							; HOTKEY FOR MOUSE POSITION 2. CURRENT HOTKEY IS {2}.
+!2::							; HOTKEY FOR MOUSE POSITION 2. CURRENT HOTKEY IS {alt}{2}.
 Click, %x2%, %y2%
+return
+#if
+
+;---SET MOUSE POSITION 3---
+!+3::							; HOTKEY THAT SETS MOUSE POSITION3. CURRENT HOTKEY IS {alt}{shift}{3}.
+mousegetpos, x3, y3					; ONE EASY WAY TO QUICKLY ADD ANOTHER MOUSE POSITION IS TO COPY
+tooltip % "Mouse click Position 3#: " x3 ", " y3		; "---SET MOUSE POSITION 2---" AND "---MOUSE POSITION 2 CLICK---" TO
+settimer,tooltipoff,500					; A NEW DOCUMENT, PRESSING {ctrl}{h} TO OPEN UP "Find and Replace" AND
+return							; REPLACING "2" WITH "3"
+
+;---MOUSE POSITION 3 CLICK---
+#if x3 is number
+!3::							; HOTKEY FOR MOUSE POSITION 3. CURRENT HOTKEY IS {alt}{3}.
+Click, %x3%, %y3%
+return
+#if
+
+;---SET MOUSE POSITION 4---
+!+4::							; HOTKEY THAT SETS MOUSE POSITION4. CURRENT HOTKEY IS {alt}{shift}{4}.
+mousegetpos, x4, y4
+tooltip % "Mouse click Position 4: " x4 ", " y4
+settimer,tooltipoff,500
+return
+
+;---MOUSE POSITION 4 CLICK---
+#if x4 is number
+!4::							; HOTKEY FOR MOUSE POSITION 4. CURRENT HOTKEY IS {alt}{4}.
+Click, %x4%, %y4%
 return
 #if
 
 ;-------------------------------TOGGLE AUTO CLICKS--------------------------------
 ;---SET TOGGLE CLICK POSITION 1---
-^+c::							; HOTKEY THAT SETS TOGGLE CLICK POSITION 1.
-mousegetpos, tx1, ty1					; CURRENT HOTKEY IS {ctrl}{shift}{c}.
-tooltip % "Toggle click Position 1: " tx1 ", " ty1	; IF YOU WANT TO ADD ANOTER TOGGLE CLICK POSITION, THEN STUDY WHAT'S
+^!c::							; HOTKEY THAT SETS TOGGLE CLICK POSITION 1.
+mousegetpos, tx1, ty1					; CURRENT HOTKEY IS {ctrl}{alt}{c}
+tooltip % "Toggle click Position 2: " tx2 ", " ty2	; IF YOU WANT TO ADD ANOTER TOGGLE CLICK POSITION, THEN STUDY WHAT'S
 settimer,tooltipoff,500					; ALREADY BEEN DONE WITH "---SET TOGGLE CLICK POSITION 2---" AND
 return							; "---TOGGLE AUTO CLICK 2---" AND EXTRAPOLATE FROM THERE.
 
 ;---TOGGLE AUTO CLICK 1---
-^+$LButton::						; HOTKEY TO START AUTO CLICKING IN TOGGLE CLICK POSITION 1.
-MouseMove, %tx1%, %ty1%
-    While (GetKeyState("LButton", "P")) {		; CURRENT HOTKEY IS {ctrl}{shift}{LClick}.
+^!$LButton::						; HOTKEY TO START AUTO CLICKING IN TOGGLE CLICK POSITION 1.
+MouseMove, %tx1%, %ty1%					; CURRENT HOTKEY IS {ctrl}{alt}{LClick}.
+    While (GetKeyState("LButton", "P")) {
         Click
         Sleep 10
     }
 return
 
 ;---SET TOGGLE CLICK POSITION 2---
-^!c::							; HOTKEY THAT SETS TOGGLE CLICK POSITION 1.
-mousegetpos, tx2, ty2					; CURRENT HOTKEY IS {ctrl}{alt}{c}.
-tooltip % "Toggle click Position 2: " tx2 ", " ty2
+^+c::							; HOTKEY THAT SETS TOGGLE CLICK POSITION 1.
+mousegetpos, tx2, ty2					; CURRENT HOTKEY IS {ctrl}{shift}{c}.
+tooltip % "Toggle click Position 1: " tx1 ", " ty1
 settimer,tooltipoff,500
 return
 
 ;---TOGGLE AUTO CLICK 2---
-^!$LButton::						; HOTKEY TO START AUTO CLICKING IN TOGGLE CLICK POSITION 2.
-MouseMove, %tx2%, %ty2%
-    While (GetKeyState("LButton", "P")) {		; CURRENT HOTKEY IS {ctrl}{alt}{LClick}.
+^+$LButton::						; HOTKEY TO START AUTO CLICKING IN TOGGLE CLICK POSITION 2.
+MouseMove, %tx2%, %ty2%					; CURRENT HOTKEY IS {ctrl}{shift}{LClick}.
+    While (GetKeyState("LButton", "P")) {
         Click
         Sleep 10
     }
